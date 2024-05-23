@@ -4,7 +4,7 @@ from flet import colors
 #botões que serão usados na tela
 botoes = [
         {'operador': 'AC', 'fonte' : colors.BLACK, 'fundo': colors.BLUE_GREY_100},
-        {'operador': '+-', 'fonte' : colors.BLACK, 'fundo': colors.BLUE_GREY_100},
+        {'operador': '#', 'fonte' : colors.BLACK, 'fundo': colors.BLUE_GREY_100},
         {'operador': '%', 'fonte' : colors.BLACK, 'fundo': colors.BLUE_GREY_100},
         {'operador': '/', 'fonte' : colors.WHITE, 'fundo': colors.ORANGE},
         {'operador': '7', 'fonte' : colors.WHITE, 'fundo': colors.WHITE24},
@@ -29,11 +29,38 @@ def main(page: ft.Page):
         page.bgcolor = '#000'
         page.window_resizable = False
         page.window_width = 270
-        page.window_height = 380
+        page.window_height = 400
         page.title = 'Calculadora'
         page.window_always_on_top = True
 
         result = ft.Text(value = '0', color = colors.WHITE, size = 20)
+
+        def calculate():
+                pass
+
+
+        def select(e):
+                value_at = result.value if result.value != '0' else ''
+                value = e.control.content.value
+
+                # Verifica o que foi digitado
+                if value.isdigit():
+                        value = value_at + value
+                elif value == 'AC':
+                        value = '0'
+                else:
+                        if value_at and value_at[-1] in ('/','*','-','+',','):  # verifica se apertou 2x um operador lógico
+                                value_at = value_at[:-1]
+                        
+                        value = value_at + value
+
+                        # Calcula o resultado da operação
+                        if value[-1] in ('=','%','#'):
+                                value = calculate()
+                
+                result.value = value
+                result.update() # Atualiza a tela
+ 
 
         # Cria onde será mostrado o resultado
         display = ft.Row(
@@ -49,7 +76,8 @@ def main(page: ft.Page):
                 height=50, #tamanho do botão
                 bgcolor=btn['fundo'], #pega da lista a cor do fundo
                 border_radius=100, 
-                alignment=ft.alignment.center #alinha o conteúdo do botão
+                alignment=ft.alignment.center, #alinha o conteúdo do botão
+                on_click=select # Diz o que fazer quando clica em algo                
         ) for btn in botoes]
 
         # Cria o padrão visual para os botões (em linhas)
