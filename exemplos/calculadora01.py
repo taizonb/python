@@ -35,8 +35,16 @@ def main(page: ft.Page):
 
         result = ft.Text(value = '0', color = colors.WHITE, size = 20)
 
-        def calculate():
-                pass
+        def calculate(operador, value_at):
+                value = eval(value_at) #faz o calculo aritmetico com strings
+
+                if operador == '%':
+                        value /= 100
+                elif operador == '#':
+                        value = -value
+
+                return value
+                        
 
 
         def select(e):
@@ -56,7 +64,7 @@ def main(page: ft.Page):
 
                         # Calcula o resultado da operação
                         if value[-1] in ('=','%','#'):
-                                value = calculate()
+                                value = calculate(operador=value[-1], value_at=value_at)
                 
                 result.value = value
                 result.update() # Atualiza a tela
