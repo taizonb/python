@@ -1,5 +1,6 @@
 import flet as ft
 from flet import colors
+from decimal import Decimal
 
 #botões que serão usados na tela
 botoes = [
@@ -36,19 +37,24 @@ def main(page: ft.Page):
         result = ft.Text(value = '0', color = colors.WHITE, size = 20)
 
         def calculate(operador, value_at):
-                value = eval(value_at) #faz o calculo aritmetico com strings
+                try:
+                        value = eval(value_at) #faz o calculo aritmetico com strings
 
-                if operador == '%':
-                        value /= 100
-                elif operador == '#':
-                        value = -value
+                        if operador == '%':
+                                value /= 100
+                        elif operador == '#':
+                                value = -value
+                except:
 
+                        return 'Error'
+                
+                digits = min(abs(Decimal(value).as_tuple().exponent), 5)
                 return value
                         
 
 
         def select(e):
-                value_at = result.value if result.value != '0' else ''
+                value_at = result.value if result.value not in ('0', 'Error') else ''
                 value = e.control.content.value
 
                 # Verifica o que foi digitado
