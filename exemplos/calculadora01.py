@@ -49,9 +49,8 @@ def main(page: ft.Page):
                         return 'Error'
                 
                 digits = min(abs(Decimal(value).as_tuple().exponent), 5)
-                return value
+                return format(value, f'.{digits}f')
                         
-
 
         def select(e):
                 value_at = result.value if result.value not in ('0', 'Error') else ''
