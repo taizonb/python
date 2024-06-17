@@ -1,4 +1,9 @@
-inp = input('Digite algo: ')
+while True:
+    line = input('>')
+    if line[0] == '#':
+        continue
+    if line == 'pronto':
+        break
+    print(line)
 
-#teste
-print(f'Você digitou: {inp}')
+print('Pronto!')
