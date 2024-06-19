@@ -1,4 +1,5 @@
 
+'''
 x = [3, 41, 12, 9, 74, 15]
 maximo = None
 print(f'Antes = {maximo}')
@@ -10,3 +11,12 @@ for num in x:
 
 
 print(f'Máximo = {maximo}')
+'''
+
+
+a = 'teste'
+
+a = a.upper()
+
+
+print(a)
