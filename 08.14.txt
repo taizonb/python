@@ -1,0 +1,6 @@
+X-DSPAM-Result: Innocent
+X-DSPAM-Processed: Sat Jan 5 09:14:16 2008
+X-DSPAM-Confidence: 0.8475
+X-DSPAM-Probability: 0.0000
+
+Details: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39772
