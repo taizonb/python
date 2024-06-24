@@ -14,3 +14,13 @@ for linha in fhand:
     if palavras[0] != 'De' : continue
     print(palavras[2])
 '''
+
+# Solução01 - Pode haver a palavra From começando uma linha e o resultado ser diferente do esperado.
+
+fhand = open('mbox-short-v2.txt')
+contador = 0
+for linha in fhand:
+    palavras = linha.split()
+    #print('Debug:', palavras)
+    if (len(palavras) == 0) or (len(palavras) < 3) or (palavras[0] != 'From') : continue
+    print(palavras[2])
