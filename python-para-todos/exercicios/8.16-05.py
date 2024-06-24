@@ -18,6 +18,26 @@ cwen@iupui.edu
 cwen@iupui.edu
 cwen@iupui.edu
 There were 27 lines in the file with From as the first word
-
-
 '''
+
+
+# Solução 01:
+
+cont = 0
+_arquivo = input('Digite o arquivo desejado: ')
+
+try:
+    arquivo = open(_arquivo, 'r')
+
+    for linha in arquivo:
+        if (len(linha) > 0) and (linha.startswith('From')):
+            linha = linha.split()  
+            if (len(linha) > 2):
+                print(linha[1])    
+                cont = cont + 1
+
+except:
+    print('Arquivo não existe.')
+
+
+print(f'Há {cont} linhas no arquivo que começam com "From".')
