@@ -22,11 +22,12 @@ try:
     arquivo = open('mbox-short.txt')
 
 except:
-    print(f'Arquivo "{arquivo}" não encontrado.')
+    print('Arquivo não encontrado.')
+    exit()
 
 
 for linhas in arquivo:
-    #linhas = linhas.rstrip()
+    linhas = linhas.rstrip()
     linhas = linhas.translate(linhas.maketrans('', '', string.punctuation))
     linhas = linhas.lower()
     palavras = linhas.split()
