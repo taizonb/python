@@ -28,7 +28,6 @@ for linhas in arquivo:
     if (len(palavras) < 3) or (palavras[0] != 'from'):
         continue
 
-    
     if (palavras[2] not in semanas):
         semanas[palavras[2]] = 1
     else:
