@@ -13,7 +13,7 @@ for num in x:
 print(f'Máximo = {maximo}')
 '''
 
-fname = input('Enter the file name: ')
+'''fname = input('Enter the file name: ')
 
 try:
     fhand = open(fname)
@@ -25,4 +25,30 @@ count = 0
 for line in fhand:
     if line.startswith('Subject:'):
         count = count + 1
-print('There were', count, 'subject lines in', fname)
+print('There were', count, 'subject lines in', fname)'''
+
+import string
+
+fhand = open('romeo.txt')
+counts = dict()
+
+for line in fhand:
+    line = line.translate(str.maketrans('', '', string.punctuation))
+    line = line.lower()
+    words = line.split()
+
+    for word in words:
+        if word not in counts:
+            counts[word] = 1
+        else:
+            counts[word] += 1
+
+# Sort the dictionary by value
+lst = list()
+for key, val in counts.items():
+    lst.append((val, key))
+
+lst.sort(reverse=True)
+
+for key, val in lst[:10]:
+    print(key, val)
