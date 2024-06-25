@@ -33,7 +33,7 @@ fhand = open('romeo.txt')
 counts = dict()
 
 for line in fhand:
-    line = line.translate(str.maketrans('', '', string.punctuation))
+    line = line.translate(line.maketrans('', '', string.punctuation))
     line = line.lower()
     words = line.split()
 
