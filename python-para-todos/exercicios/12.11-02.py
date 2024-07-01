@@ -10,26 +10,33 @@ import socket
 _url = input('Digite uma URL: ')
 count = 0
 
+
+mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host_url = _url.split('/')   # Quebra o endereço todo na URL simples
+
 try:
-    mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    mysock.connect((host_url[2], 80))   # Conecta ao servidor
+    cmd = f'GET {_url} HTTP/1.0\r\n\r\n'.encode()   # Ajusta a url no padrão
+    mysock.send(cmd)   # Envia a URL ajustadapara para o servidor
 
-    host_url = _url.split('/')
+    data2 = mysock.recv(510)   # Recebe os primeiros "X" caracteres
 
-    print(host_url[2])
-
-    mysock.connect((host_url[2], 80))
-    cmd = f'GET {_url} HTTP/1.0\r\n\r\n'.encode()
-    mysock.send(cmd)
     while True:
-        data = mysock.recv(512)
-        if len(data) < 1:
+        data = mysock.recv(3000)   # Loop que recebe o restante dos caracteres
+        count += len(data)   # Conta a qtd de caracteres total
+        if len(data) < 1:   # Sai do loop quando acabam os caracteres
             break
-        count += count + len(data)
-        print(data.decode(),end='')
         mysock.close()
+        
 
+# Caso de errado, sai do loop e fecha o programa
 except:
     print('URL digitada incorreta.')
 
 
-print(f'\nQuantidade de caracteres: {count}')
+# Mostra as informações na tela e conta o total de caracteres
+if (count != 0):
+    print(data2.decode(),end='')
+    total = len(data) + len(data2)
+
+    print(f'\nQuantidade de caracteres: {total}')
