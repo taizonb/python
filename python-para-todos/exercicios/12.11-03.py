@@ -11,8 +11,7 @@ import urllib.request, urllib.parse, urllib.error
 import string
 
 
-palavras_limite = 115
-palavras_qtd = 0
+palavras_limite = 115   # Limites para qtd de palavras apresentadas
 palavras_total = 0
 
 
@@ -21,25 +20,22 @@ _site = input('Digite o site que deseja: ')
 #site = _site.split('/')  # pega somente o servidor
 #site = site[2]
 
-
 try:
     site = urllib.request.urlopen(_site)
     
     for linhas in site:
         linhas = linhas.decode().strip()
-        palavras_qtd = len(linhas)
-        palavras_total += len(linhas)
 
         if (palavras_total <= palavras_limite):
-            print(linhas)
-        else:
-            print(linhas[:palavras_total - (palavras_total - palavras_limite)])
 
-        print(palavras_qtd)       
-        print(palavras_total)   
+            print(linhas[:palavras_limite - palavras_total])
+
+        palavras_total += len(linhas) 
+
 except:
     print('Site digitado incorreto. ')
 
 
-if (palavras_qtd > 1):
-    print(f'\nQuantidade de caracteres totais: {palavras_total}')
+if (palavras_total > 1):
+    print(f'\nQuantidade de caracteres mostrador: {palavras_limite}')
+    print(f'Quantidade de caracteres totais: {palavras_total}')
