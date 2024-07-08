@@ -152,7 +152,7 @@ for tag in tags:
     print(tag.get('href', None))'''
 
 
-import urllib.request, urllib.parse, urllib.error
+'''import urllib.request, urllib.parse, urllib.error
 import json
 import ssl
 
@@ -202,4 +202,28 @@ while True:
     lng = js['results'][0]['geometry']['location']['lng']
     print('lat', lat, 'lng', lng)
     location = js['results'][0]['formatted_address']
-    print(location)
+    print(location)'''
+
+
+import sqlite3
+
+conn = sqlite3.connect('music.sqlite')
+cur = conn.cursor()
+
+#cur.execute('DROP TABLE IF EXISTS Tracks')
+#cur.execute('CREATE TABLE Tracks (title TEXT, plays INTEGER)')
+
+#conn.close()
+
+cur.execute('INSERT INTO Tracks (title, plays) VALUES (?, ?)', ('Thunderstruck', 20))
+cur.execute('INSERT INTO Tracks (title, plays) VALUES (?, ?)', ('My Way', 15))
+conn.commit()
+
+print('Tracks:')
+cur.execute('SELECT title, plays FROM Tracks')
+for row in cur:
+    print(row)
+
+cur.execute('DELETE FROM Tracks WHERE plays < 100')
+conn.commit()
+cur.close()
