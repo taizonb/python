@@ -205,7 +205,7 @@ while True:
     print(location)'''
 
 
-import sqlite3
+'''import sqlite3
 
 conn = sqlite3.connect('music.sqlite')
 cur = conn.cursor()
@@ -226,4 +226,11 @@ for row in cur:
 
 cur.execute('DELETE FROM Tracks WHERE plays < 100')
 conn.commit()
-cur.close()
+cur.close()'''
+
+import sqlite3
+
+conn = sqlite3.connect('spider.sqlite')
+cur = conn.cursor()
+
+cur.execute('CREATE TABLE Pessoas (id INTEGER PRIMARY KEY, nome TEXT UNIQUE, recuperada INTEGER)')

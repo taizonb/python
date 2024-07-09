@@ -9,8 +9,7 @@ import ssl
 TWITTER_URL = 'https://api.twitter.com/1.1/friends/list.json'
 conn = sqlite3.connect('spider.sqlite')
 cur = conn.cursor()
-cur.execute('''
-CREATE TABLE IF NOT EXISTS Twitter (name TEXT, retrieved INTEGER, friends INTEGER)''')
+cur.execute('''CREATE TABLE IF NOT EXISTS Twitter (name TEXT, retrieved INTEGER, friends INTEGER)''')
 
 # Ignore SSL certificate errors
 ctx = ssl.create_default_context()
